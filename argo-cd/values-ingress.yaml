@@ -1,0 +1,28 @@
+installCRD: true
+
+controller:
+  replicas: 1
+
+repoServer:
+  replicas: 1
+
+server:
+  replicas: 1
+  service:
+    type: NodePort
+    namedTargetPort: false
+  ingress:
+    enabled: true
+    annotations:
+    - kubernetes.io/ingress.class: "nginx"
+    paths:
+    - /
+    pathType: Prefix
+  extraArgs:
+    - --insecure
+
+redis:
+  enabled: true
+
+redis-ha:
+  enabled: false
